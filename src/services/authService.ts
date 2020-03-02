@@ -12,9 +12,11 @@ function isAuthPayload(obj: any): obj is IAuthPayload {
 }
 
 const getSecret = (): string => {
-  return process.env.SECRET || "defaultPrivateKey";
+  console.log(`secret = ${process.env.secret}`);
+  return process.env.secret || "defaultPrivateKey";
 };
 
+// for test application only checking that userName ends in @bentley.com and the password is always 123
 const validateCredentials = (userName: string, password: string): boolean | ApiError => {
   if (!userName.toLowerCase().endsWith("@bentley.com")) {
     return new ApiError(401, "Invalid User Name");

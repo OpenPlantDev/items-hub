@@ -25,7 +25,7 @@ export class LoginRouter implements IApiRouter {
       if (result instanceof Error) {
         return next(result);
       } else {
-        return res.status(200).json({result});
+        return res.status(200).json({token: result});
       }
     });
 

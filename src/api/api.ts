@@ -3,6 +3,7 @@ import * as http from "http";
 import {ApiError} from "./ApiError";
 import {IApiRouter} from "./routers/IApiRouter";
 import { LoginRouter } from "./routers/LoginRouter";
+import { ValidateTokenRouter } from "./routers/ValidateTokenRouter";
 import * as AuthService from "../services/authService";
 
 export class Api {
@@ -48,6 +49,10 @@ export class Api {
       }
       return next();
     });
+
+    // at this point validate token should always return true (validated above)
+    const validateTokenRouter = new ValidateTokenRouter();
+    api.use(validateTokenRouter.route, validateTokenRouter.routeHandler());
 
     // handle routes defined by routers
     for (const router of routers) {
